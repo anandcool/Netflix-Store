@@ -28,7 +28,7 @@ const App = () =>{
           headerStyle:{
             backgroundColor:'#0f4c75'
           },
-          title:'LCO netflix App',
+          title:'Netflix App',
           headerTitleStyle:{
             textAlign:'center',
             color:"#00b7c2"

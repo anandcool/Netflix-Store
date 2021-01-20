@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { Text,StyleSheet, ScrollView } from 'react-native'
 import { Container,H1,Form,Item, Input, Button } from 'native-base';
 
-import shortId from 'shortid'
+
 import AsyncStorage from '@react-native-community/async-storage';
 import shortid from 'shortid';
 
@@ -66,7 +66,7 @@ const Add = ({navigation}) =>{
                     onChangeText={text => setTotalNoSeason(text)}
                     />
                 </Item>
-                <Button rounded block onPress={()=>addToList}>
+                <Button rounded block onPress={()=>addToList()}>
                     <Text style={{color:'#eee'}}>Add</Text>
                 </Button>
             </Form>
