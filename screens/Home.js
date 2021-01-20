@@ -25,12 +25,22 @@ const Home = ({navigation,route}) =>{
 
     }
 
-    const deleteSeason = async () =>{
+    const deleteSeason = async (id) =>{
 
+      const newList =  listOfSeasons.filter(season => season.id !== id)
+      await AsyncStorage.setItem('@season_list',JSON.stringify(newList))
+      setListOfSeasons(newList)
     }
 
-    const markComplete = async () =>{
-
+    const markComplete = async (id) =>{
+      const newArr = listOfSeasons.map(list =>{
+        if(list.id == id){
+          list.isWatched = !list.isWatched
+        }
+        return list
+      })
+      await AsyncStorage.setItem('@season_list',JSON.stringify(newArr))
+      setListOfSeasons(newArr)
     }
 
     useEffect(()=>{
@@ -64,11 +74,14 @@ const Home = ({navigation,route}) =>{
                     <Button
                     style={styles.actionButton}
                     danger
+                    onPress={()=>deleteSeason(season.id)}
                     >
                       <Icon name="trash" active/>
                     </Button>
                     <Button
-                    style={styles.actionButton}>
+                    style={styles.actionButton}
+                    onPress={()=> navigation.navigate('Edit',{season})}
+                    >
                       <Icon name="edit" active type="Feather"/>
                     </Button>
                   </Left>
@@ -77,7 +90,9 @@ const Home = ({navigation,route}) =>{
                     <Text note> {season.totalNoSeason} Seasons to watch</Text>
                   </Body>
                   <Right>
-                    <CheckBox/>
+                    <CheckBox
+                    checked={season.isWatched}
+                    onPress={()=>markComplete(season.id)}/>
                   </Right>
                 </ListItem>
                 )
